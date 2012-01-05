@@ -1,0 +1,8 @@
+target
+work
+.idea
+test-*
+*.iml
+.project
+.classpath
+.settings
