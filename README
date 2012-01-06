@@ -1,0 +1,6 @@
+PollSCM Plugin
+----
+
+This plugin adds a Poll Now button to your job when Poll SCM option is enabled.
+
+https://wiki.jenkins-ci.org/display/JENKINS/PollSCM+Plugin
