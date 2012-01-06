@@ -24,11 +24,11 @@ THE SOFTWARE.
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <j:set var="job" value="${it.owner}"/>
-  <j:if test="${job.hasPermission(job.BUILD)}">
+  <j:if test="${job.hasPermission(it.POLL)}">
     ${it.trigger.run()}
     <st:redirect url="../scmPollLog"/>
   </j:if>
-  <j:if test="${!job.hasPermission(job.BUILD)}">
+  <j:if test="${!job.hasPermission(it.POLL)}">
     <l:layout>
       <st:include it="${job}" page="sidepanel.jelly" />
       <l:main-panel>

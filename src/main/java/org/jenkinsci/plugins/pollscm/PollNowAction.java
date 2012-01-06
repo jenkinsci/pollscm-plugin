@@ -26,8 +26,11 @@ package org.jenkinsci.plugins.pollscm;
 
 import hudson.Extension;
 import hudson.model.Action;
+import hudson.model.Item;
 import hudson.model.TransientProjectActionFactory;
 import hudson.model.AbstractProject;
+import hudson.security.Permission;
+import hudson.security.PermissionScope;
 import hudson.triggers.Trigger;
 import hudson.triggers.SCMTrigger;
 
@@ -75,5 +78,7 @@ public class PollNowAction implements Action {
 	public String getUrlName() {
 		return "poll";
 	}
+	
+	public static final Permission POLL = new Permission(Item.PERMISSIONS, "Poll", Messages._PollNowAction_PollPermission_Description(),  Permission.UPDATE, PermissionScope.ITEM);
 
 }

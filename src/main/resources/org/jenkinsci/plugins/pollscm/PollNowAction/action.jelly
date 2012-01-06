@@ -27,7 +27,7 @@ THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <j:if test="${h.hasPermission(it,it.BUILD)}">
+  <j:if test="${h.hasPermission(it,action.POLL)}">
     <j:if test="${action.iconFileName!=null}">
       <l:task icon="${h.getIconFilePath(action)}" title="${action.displayName}"
         href="${h.getActionUrl(it.url,action)}" />
