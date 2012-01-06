@@ -31,7 +31,7 @@
 		<relativePath />
 	</parent>
 	<artifactId>pollscm</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>hpi</packaging>
 	<name>Jenkins Poll SCM plugin</name>
 	<description>This plugin adds a Poll SCM button on your jobs that allow you to poll a project on-demand</description>
