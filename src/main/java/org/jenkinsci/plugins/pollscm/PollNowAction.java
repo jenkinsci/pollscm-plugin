@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2012, Vincent Latombe
+ * Copyright (c) 2012-2013, Vincent Latombe
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,33 +37,33 @@ import hudson.triggers.SCMTrigger;
 import java.util.Collection;
 import java.util.Collections;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class PollNowAction implements Action {
 	@Extension
 	public static class TransientProjectActionFactoryImpl extends TransientProjectActionFactory {
 
-		@Override
+    @Override
 		public Collection<? extends Action> createFor(AbstractProject target) {
 			Trigger trigger = target.getTrigger(SCMTrigger.class);
 			if (trigger != null) {
 				return Collections.singleton(new PollNowAction(target));
-			} else {
-				return Collections.EMPTY_LIST;
 			}
+      return Collections.EMPTY_LIST;
 		}
 
 	}
 	
-	private AbstractProject target;
+  private AbstractProject target;
 
-	public PollNowAction(AbstractProject target) {
+  public PollNowAction(AbstractProject target) {
 		this.target = target;
 	}
 	
-	public Trigger getTrigger() {
+  public Trigger getTrigger() {
 		return target.getTrigger(SCMTrigger.class);
 	}
 	
-	public AbstractProject getOwner() {
+  public AbstractProject getOwner() {
 		return target;
 	}
 
