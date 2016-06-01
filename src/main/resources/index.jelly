@@ -24,6 +24,7 @@
     THE SOFTWARE.
 
 -->
+<?jelly escape-by-default='true'?>
 <div>
   This plugin adds a Poll Now button to your job when Poll SCM option is enabled.
 </div>

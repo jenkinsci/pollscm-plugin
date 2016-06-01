@@ -29,8 +29,8 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.424</version>
-    <relativePath>../pom.xml</relativePath>
+    <version>2.9</version>
+    <relativePath />
   </parent>
 
   <artifactId>pollscm</artifactId>
@@ -40,6 +40,11 @@
   <name>Jenkins Poll SCM plugin</name>
   <description>This plugin adds a Poll SCM button on your jobs that allow you to poll a project on-demand</description>
   <url>https://wiki.jenkins-ci.org/display/JENKINS/PollSCM+Plugin</url>
+
+  <properties>
+    <jenkins.version>1.580.3</jenkins.version>
+    <java.level>6</java.level>
+  </properties>
 
   <licenses>
     <license>
@@ -78,33 +83,5 @@
       <url>http://repo.jenkins-ci.org/public/</url>
     </pluginRepository>
   </pluginRepositories>
-
-  <distributionManagement>
-    <repository>
-      <id>java.net-m2-repository</id>
-      <url>http://maven.jenkins-ci.org/content/repositories/releases/</url>
-    </repository>
-    <site>
-      <id>github-project-site</id>
-      <url>gitsite:git@github.com/jenkinsci/keyboard-shortcuts-plugin</url>
-    </site>
-  </distributionManagement>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.2.1</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>1.5</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>
