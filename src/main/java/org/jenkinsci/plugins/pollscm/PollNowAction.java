@@ -27,58 +27,60 @@ package org.jenkinsci.plugins.pollscm;
 import hudson.Extension;
 import hudson.model.Action;
 import hudson.model.Item;
-import hudson.model.TransientProjectActionFactory;
-import hudson.model.AbstractProject;
 import hudson.security.Permission;
 import hudson.security.PermissionScope;
 import hudson.triggers.Trigger;
-import hudson.triggers.SCMTrigger;
+import jenkins.model.TransientActionFactory;
+import jenkins.triggers.SCMTriggerItem;
 
 import java.util.Collection;
 import java.util.Collections;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class PollNowAction implements Action {
-	@Extension
-	public static class TransientProjectActionFactoryImpl extends TransientProjectActionFactory {
+    public static final Permission POLL = new Permission(Item.PERMISSIONS, "Poll", Messages._PollNowAction_PollPermission_Description(), Permission.UPDATE, PermissionScope.ITEM);
+    private SCMTriggerItem target;
 
-    @Override
-		public Collection<? extends Action> createFor(AbstractProject target) {
-			Trigger trigger = target.getTrigger(SCMTrigger.class);
-			if (trigger != null) {
-				return Collections.singleton(new PollNowAction(target));
-			}
-      return Collections.EMPTY_LIST;
-		}
+    public PollNowAction(SCMTriggerItem target) {
+        this.target = target;
+    }
 
-	}
-	
-  private AbstractProject target;
+    public Trigger getTrigger() {
+        return target.getSCMTrigger();
+    }
 
-  public PollNowAction(AbstractProject target) {
-		this.target = target;
-	}
-	
-  public Trigger getTrigger() {
-		return target.getTrigger(SCMTrigger.class);
-	}
-	
-  public AbstractProject getOwner() {
-		return target;
-	}
+    public SCMTriggerItem getOwner() {
+        return target;
+    }
 
-	public String getIconFileName() {
-		return "/plugin/pollscm/images/24x24/clipboard-play.png";
-	}
+    public String getIconFileName() {
+        return "/plugin/pollscm/images/24x24/clipboard-play.png";
+    }
 
-	public String getDisplayName() {
-		return Messages.PollNowAction_PollNow();
-	}
+    public String getDisplayName() {
+        return Messages.PollNowAction_PollNow();
+    }
 
-	public String getUrlName() {
-		return "poll";
-	}
-	
-	public static final Permission POLL = new Permission(Item.PERMISSIONS, "Poll", Messages._PollNowAction_PollPermission_Description(),  Permission.UPDATE, PermissionScope.ITEM);
+    public String getUrlName() {
+        return "poll";
+    }
+
+    @Extension
+    public static class TransientProjectActionFactoryImpl extends TransientActionFactory<SCMTriggerItem> {
+
+        @Override
+        public Collection<? extends Action> createFor(SCMTriggerItem target) {
+            Trigger trigger = target.getSCMTrigger();
+            if (trigger != null) {
+                return Collections.singleton(new PollNowAction(target));
+            }
+            return Collections.EMPTY_LIST;
+        }
+
+        @Override
+        public Class type() {
+            return SCMTriggerItem.class;
+        }
+    }
 
 }
