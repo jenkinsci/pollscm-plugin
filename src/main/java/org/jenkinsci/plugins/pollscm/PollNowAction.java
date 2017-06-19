@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2012-2013, Vincent Latombe
+ * Copyright (c) 2012-2017, Vincent Latombe
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,24 @@
 package org.jenkinsci.plugins.pollscm;
 
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+
+import org.kohsuke.accmod.Restricted;
+import org.kohsuke.accmod.restrictions.NoExternalUse;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.interceptor.RequirePOST;
+
 import hudson.Extension;
 import hudson.model.Action;
 import hudson.model.Item;
+import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.security.PermissionScope;
 import hudson.triggers.Trigger;
+import jenkins.model.Jenkins;
 import jenkins.model.TransientActionFactory;
 import jenkins.triggers.SCMTriggerItem;
 
@@ -54,7 +66,16 @@ public class PollNowAction implements Action {
     }
 
     public String getIconFileName() {
-        return "/plugin/pollscm/images/24x24/clipboard-play.png";
+        return getACL().hasPermission(POLL) ? "/plugin/pollscm/images/24x24/clipboard-play.png" : null;
+    }
+
+    private ACL getACL() {
+        Jenkins j = Jenkins.getInstance();
+        if (j == null) {
+            throw new IllegalStateException("Jenkins is null");
+        } else {
+            return j.getACL();
+        }
     }
 
     public String getDisplayName() {
@@ -63,6 +84,22 @@ public class PollNowAction implements Action {
 
     public String getUrlName() {
         return "poll";
+    }
+
+    /**
+     * Schedules a new SCM polling command.
+     */
+    @RequirePOST
+    @Restricted(NoExternalUse.class)
+    public void doPolling(StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
+        getACL().checkPermission(POLL);
+        Trigger trigger = getTrigger();
+        if (trigger != null) {
+            trigger.run();
+        } else {
+            throw new IllegalStateException("Trigger is null");
+        }
+        rsp.sendRedirect(".");
     }
 
     @Extension

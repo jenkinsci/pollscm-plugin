@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2012, Vincent Latombe
+Copyright (c) 2012-2017, Vincent Latombe
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +27,17 @@ THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <j:if test="${h.hasPermission(it,action.POLL)}">
-    <j:if test="${action.iconFileName!=null}">
-      <l:task icon="${h.getIconFilePath(action)}" title="${action.displayName}"
-        href="${h.getActionUrl(it.url,action)}" />
+    <j:set var="icon" value="${action.iconClassName != null ? action.iconClassName + ' icon-md' : action.iconFileName}"/>
+    <j:if test="${icon!=null}">
+        <j:set var="id" value="${h.generateId()}"/>
+        <l:task icon="${icon}" title="${action.displayName}"
+                href="${h.getActionUrl(it.url,action)}/polling" onclick="${'return poll_' + id + '(this)'}" post="true"/>
+        <script>
+            function poll_${id}(a) {
+                new Ajax.Request(a.href);
+                hoverNotification('${%Poll scheduled}',a.parentNode);
+                return false;
+            }
+        </script>
     </j:if>
-  </j:if>
 </j:jelly>
