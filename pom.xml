@@ -64,13 +64,13 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/pollscm-plugin.git</connection>
+    <connection>scm:git:https://github.com/jenkinsci/pollscm-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/pollscm-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/pollscm-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
-  <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
+  <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
