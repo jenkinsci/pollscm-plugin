@@ -34,7 +34,12 @@ THE SOFTWARE.
                 href="${h.getActionUrl(it.url,action)}/polling" onclick="${'return poll_' + id + '(this)'}" post="true"/>
         <script>
             function poll_${id}(a) {
-                new Ajax.Request(a.href);
+                fetch(a.href, {
+                  method: "post",
+                  headers: crumb.wrap({
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  }),
+                });
                 hoverNotification('${%Poll scheduled}',a.parentNode);
                 return false;
             }
