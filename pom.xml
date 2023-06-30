@@ -38,8 +38,8 @@
   <packaging>hpi</packaging>
 
   <name>Jenkins Poll SCM plugin</name>
-  <description>This plugin adds a Poll SCM button on your jobs that allow you to poll a project on-demand</description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/PollSCM+Plugin</url>
+  <description>Adds a Poll Now button to jobs that have enabled the Poll SCM option so that users can poll a project on demand.</description>
+  <url>https://github.com/jenkinsci/pollscm-plugin/</url>
 
   <properties>
     <jenkins.version>2.361.4</jenkins.version>

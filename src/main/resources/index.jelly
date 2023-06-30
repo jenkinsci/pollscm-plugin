@@ -26,5 +26,5 @@
 -->
 <?jelly escape-by-default='true'?>
 <div>
-  This plugin adds a Poll Now button to your job when Poll SCM option is enabled.
+  Adds a <strong>Poll Now</strong> button to jobs that have enabled the <strong>Poll SCM</strong> option so that users can poll a project on demand.
 </div>
