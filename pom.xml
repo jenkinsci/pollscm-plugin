@@ -60,6 +60,15 @@
       <email>vincent.latombe@gmail.com</email>
       <timezone>+1</timezone>
     </developer>
+    <developer>
+      <id>markewaite</id>
+      <name>Mark Waite</name>
+      <email>mark.earl.waite@gmail.com</email>
+      <roles>
+        <role>maintainer</role>
+      </roles>
+      <timezone>America/Denver</timezone>
+    </developer>
   </developers>
 
   <scm>
