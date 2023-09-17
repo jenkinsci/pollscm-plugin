@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.jvnet.hudson.test.JenkinsRule;
+import org.jvnet.hudson.test.WithoutJenkins;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.mockito.MockedStatic;
@@ -76,9 +77,9 @@ class PollNowActionTest {
     }
 
     @Test
+    @WithoutJenkins
     void getIconFileNameIllegalExceptionHandler(){
         try(MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)){
-            jenkinsMockedStatic.when(()-> Jenkins.getInstance()).thenReturn(null);
             assertThrows(IllegalStateException.class,()->mockPollNowAction.getIconFileName());
         }
     }
