@@ -41,10 +41,6 @@
   <description>Adds a Poll Now button to jobs that have enabled the Poll SCM option so that users can poll a project on demand.</description>
   <url>https://github.com/jenkinsci/pollscm-plugin/</url>
 
-  <properties>
-    <jenkins.version>2.361.4</jenkins.version>
-  </properties>
-
   <licenses>
     <license>
       <name>MIT license</name>
@@ -74,9 +70,14 @@
   <scm>
     <connection>scm:git:https://github.com/jenkinsci/pollscm-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/pollscm-plugin.git</developerConnection>
-    <url>https://github.com/jenkinsci/pollscm-plugin</url>
     <tag>HEAD</tag>
+    <url>https://github.com/jenkinsci/pollscm-plugin</url>
   </scm>
+
+  <properties>
+    <jenkins.version>2.361.4</jenkins.version>
+    <spotless.check.skip>false</spotless.check.skip>
+  </properties>
 
   <dependencies>
     <dependency>
