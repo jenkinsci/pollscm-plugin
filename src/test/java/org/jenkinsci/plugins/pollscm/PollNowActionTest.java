@@ -109,7 +109,6 @@ class PollNowActionTest {
         }
     }
 
-
     @Test
     void doPollingThatThrowsException() {
         try(MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)){
