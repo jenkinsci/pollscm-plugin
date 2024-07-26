@@ -75,7 +75,7 @@
   </scm>
 
   <properties>
-    <jenkins.version>2.426.3</jenkins.version>
+    <jenkins.version>2.440.3</jenkins.version>
     <spotbugs.effort>Max</spotbugs.effort>
     <spotbugs.threshold>Low</spotbugs.threshold>
     <spotless.check.skip>false</spotless.check.skip>
