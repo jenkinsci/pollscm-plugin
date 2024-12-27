@@ -60,7 +60,7 @@ class PollNowActionTest {
             jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
             when(acl.hasPermission(PollNowAction.POLL)).thenReturn(true);
             String iconName = mockPollNowAction.getIconFileName();
-            assertEquals("/plugin/pollscm/images/24x24/clipboard-play.png", iconName);
+            assertEquals("symbol-play", iconName);
         }
     }
 

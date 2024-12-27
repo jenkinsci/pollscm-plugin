@@ -66,7 +66,7 @@ public class PollNowAction implements Action {
     }
 
     public String getIconFileName() {
-        return getACL().hasPermission(POLL) ? "/plugin/pollscm/images/24x24/clipboard-play.png" : null;
+        return getACL().hasPermission(POLL) ? "symbol-play" : null;
     }
 
     private ACL getACL() {
