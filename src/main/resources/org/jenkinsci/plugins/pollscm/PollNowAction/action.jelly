@@ -31,7 +31,7 @@ THE SOFTWARE.
     <j:if test="${icon!=null}">
         <j:set var="id" value="${h.generateId()}"/>
         <st:adjunct includes="org.jenkinsci.plugins.pollscm.PollNowAction.polling"/>
-        <l:task icon="${icon}"
-                title="${action.displayName}" href="${h.getActionUrl(it.url,action)}/polling" data-callback="pollAction" post="true"/>
+        <l:task icon="${icon}" title="${action.displayName}"
+                href="${h.getActionUrl(it.url,action)}/polling" data-callback="pollAction" post="true"/>
     </j:if>
 </j:jelly>
