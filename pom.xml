@@ -34,7 +34,7 @@
   </parent>
 
   <artifactId>pollscm</artifactId>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.6</version>
   <packaging>hpi</packaging>
 
   <name>Jenkins Poll SCM plugin</name>
@@ -70,7 +70,7 @@
   <scm>
     <connection>scm:git:https://github.com/jenkinsci/pollscm-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/pollscm-plugin.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>pollscm-1.6</tag>
     <url>https://github.com/jenkinsci/pollscm-plugin</url>
   </scm>
 
