@@ -15,8 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 import org.jvnet.hudson.test.WithoutJenkins;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.StaplerRequest2;
+import org.kohsuke.stapler.StaplerResponse2;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
@@ -98,8 +98,8 @@ class PollNowActionTest {
     void doPolling() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
             jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
-            StaplerRequest req = mock(StaplerRequest.class);
-            StaplerResponse res = mock(StaplerResponse.class);
+            StaplerRequest2 req = mock(StaplerRequest2.class);
+            StaplerResponse2 res = mock(StaplerResponse2.class);
             doNothing().when(mockScmTrigger).run();
 
             assertDoesNotThrow(() -> mockPollNowAction.doPolling(req, res));
@@ -111,8 +111,8 @@ class PollNowActionTest {
     void doPollingThatThrowsException() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
             jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
-            StaplerRequest req = mock(StaplerRequest.class);
-            StaplerResponse res = mock(StaplerResponse.class);
+            StaplerRequest2 req = mock(StaplerRequest2.class);
+            StaplerResponse2 res = mock(StaplerResponse2.class);
             when(mockPollNowAction.getTrigger()).thenReturn(null);
 
             assertThrows(IllegalStateException.class, () -> mockPollNowAction.doPolling(req, res));

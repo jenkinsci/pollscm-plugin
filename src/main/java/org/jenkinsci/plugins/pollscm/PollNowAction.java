@@ -30,17 +30,17 @@ import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.security.PermissionScope;
 import hudson.triggers.Trigger;
+import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import javax.servlet.ServletException;
 import jenkins.model.Jenkins;
 import jenkins.model.TransientActionFactory;
 import jenkins.triggers.SCMTriggerItem;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.StaplerRequest2;
+import org.kohsuke.stapler.StaplerResponse2;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -91,7 +91,7 @@ public class PollNowAction implements Action {
      */
     @RequirePOST
     @Restricted(NoExternalUse.class)
-    public void doPolling(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+    public void doPolling(StaplerRequest2 req, StaplerResponse2 rsp) throws IOException, ServletException {
         getACL().checkPermission(POLL);
         Trigger trigger = getTrigger();
         if (trigger != null) {
