@@ -28,6 +28,7 @@ import hudson.model.Action;
 import hudson.model.Item;
 import hudson.security.ACL;
 import hudson.security.Permission;
+import hudson.security.PermissionGroup;
 import hudson.security.PermissionScope;
 import hudson.triggers.Trigger;
 import jakarta.servlet.ServletException;
@@ -45,12 +46,19 @@ import org.kohsuke.stapler.interceptor.RequirePOST;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PollNowAction implements Action {
-    public static final Permission POLL = new Permission(
-            Item.PERMISSIONS,
-            "Poll",
-            Messages._PollNowAction_PollPermission_Description(),
-            Permission.UPDATE,
-            PermissionScope.ITEM);
+    private static final PermissionGroup PERMISSIONS = new PermissionGroup(
+        PollNowAction.class,
+        Messages._PollNowAction_Permissions_Title()
+    );
+
+    public static final Permission POLL = new Permission.Builder(PermissionScope.ITEM)
+        .group(PERMISSIONS)
+        .name("Poll")
+        .id("org.jenkinsci.plugins.pollscm.Poll")
+        .description(Messages._PollNowAction_PollPermission_Description())
+        .impliedBy(Permission.UPDATE)
+        .build();
+
     private SCMTriggerItem target;
 
     public PollNowAction(SCMTriggerItem target) {
