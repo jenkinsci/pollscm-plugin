@@ -10,10 +10,8 @@ import java.util.Collection;
 import java.util.Collections;
 import jenkins.model.Jenkins;
 import jenkins.triggers.SCMTriggerItem;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.jvnet.hudson.test.JenkinsRule;
 import org.jvnet.hudson.test.WithoutJenkins;
 import org.kohsuke.stapler.StaplerRequest2;
 import org.kohsuke.stapler.StaplerResponse2;
@@ -26,9 +24,6 @@ class PollNowActionTest {
     private SCMTrigger mockScmTrigger;
     private ACL acl;
     private Jenkins jenkins;
-
-    @Rule
-    JenkinsRule jenkinsRule = new JenkinsRule();
 
     @BeforeEach
     void setup() {
@@ -57,7 +52,7 @@ class PollNowActionTest {
     @Test
     void getIconFileNameWithPermission() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
-            jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
+            jenkinsMockedStatic.when(Jenkins::getInstance).thenReturn(jenkins);
             when(acl.hasPermission(PollNowAction.POLL)).thenReturn(true);
             String iconName = mockPollNowAction.getIconFileName();
             assertEquals("symbol-play", iconName);
@@ -67,10 +62,10 @@ class PollNowActionTest {
     @Test
     void getIconFileNameWithoutPermission() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
-            jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
+            jenkinsMockedStatic.when(Jenkins::getInstance).thenReturn(jenkins);
             when(acl.hasPermission(PollNowAction.POLL)).thenReturn(false);
             String iconName = mockPollNowAction.getIconFileName();
-            assertEquals(null, iconName);
+            assertNull(iconName);
         }
     }
 
@@ -97,7 +92,7 @@ class PollNowActionTest {
     @Test
     void doPolling() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
-            jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
+            jenkinsMockedStatic.when(Jenkins::getInstance).thenReturn(jenkins);
             StaplerRequest2 req = mock(StaplerRequest2.class);
             StaplerResponse2 res = mock(StaplerResponse2.class);
             doNothing().when(mockScmTrigger).run();
@@ -110,7 +105,7 @@ class PollNowActionTest {
     @Test
     void doPollingThatThrowsException() {
         try (MockedStatic<Jenkins> jenkinsMockedStatic = Mockito.mockStatic(Jenkins.class, CALLS_REAL_METHODS)) {
-            jenkinsMockedStatic.when(() -> Jenkins.getInstance()).thenReturn(jenkins);
+            jenkinsMockedStatic.when(Jenkins::getInstance).thenReturn(jenkins);
             StaplerRequest2 req = mock(StaplerRequest2.class);
             StaplerResponse2 res = mock(StaplerResponse2.class);
             when(mockPollNowAction.getTrigger()).thenReturn(null);
